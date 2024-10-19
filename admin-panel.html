@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel do Administrador</title>
+  <style>
+    body {
+      background-image: url("4k.jpg");
+      background-size: cover;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 3px solid #a0a0a0;
+      border-radius: 6px;
+      background-color: rgb(0, 0, 0);
+      color: #fff;
+    }
+
+    button {
+      background-color: #ff0000;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #ff6347;
+    }
+
+    .links {
+      margin-top: 20px;
+    }
+
+    .links a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      display: inline-block;
+    }
+
+    .links a:hover {
+      color: #ff69b4;
+    }
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Painel do Administrador</h1>
+    
+    <h2>Adicionar Tarefa</h2>
+    <input type="text" id="task" placeholder="Tarefa" required>
+    <input type="text" id="assignedTo" placeholder="Email do Usuário" required>
+    <button onclick="addTask()">Adicionar Tarefa</button>
+
+    <h2>Remover Tarefa</h2>
+    <input type="text" id="taskId" placeholder="ID da Tarefa" required>
+    <button onclick="removeTask()">Remover Tarefa</button>
+
+    <div id="tasks"></div>
+    <div class="links">
+      <a href="view-tasks.html">Ver Minhas Tarefas</a>
+      <a href="login.html">Sair</a>
+    </div>
+  </div>
+
+  <script>
+    // Configuração do Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDG8aRL5AtR1dhetKR98-o3tzacxUH9PZ8",
+      authDomain: "minecraft-5b0ce.firebaseapp.com",
+      projectId: "minecraft-5b0ce",
+      storageBucket: "minecraft-5b0ce.appspot.com",
+      messagingSenderId: "217153186475",
+      appId: "1:217153186475:web:393fd9c179cb25c090e5ee"
+    };
+
+    // Inicializando o Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Verifica se o usuário é administrador
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // Aqui você pode definir uma condição para verificar se o usuário é um administrador
+        if (user.email !== "admin@example.com") { // Altere para o email do administrador
+          alert("Você não tem permissão para acessar esta página.");
+          window.location.href = "view-tasks.html"; // Redireciona não administradores
+        }
+      } else {
+        window.location.href = "login.html"; // Redireciona não autenticados
+      }
+    });
+
+    // Função para adicionar uma nova tarefa
+    async function addTask() {
+      const task = document.getElementById("task").value;
+      const assignedTo = document.getElementById("assignedTo").value;
+
+      try {
+        await db.collection("tasks").add({
+          task: task,
+          assignedTo: assignedTo,
+          completed: false
+        });
+        alert("Tarefa adicionada com sucesso!");
+      } catch (e) {
+        console.error("Erro ao adicionar tarefa: ", e);
+        alert("Erro ao adicionar tarefa.");
+      }
+    }
+
+    // Função para remover uma tarefa
+    async function removeTask() {
+      const taskId = document.getElementById("taskId").value;
+
+      try {
+        await db.collection("tasks").doc(taskId).delete();
+        alert("Tarefa removida com sucesso!");
+      } catch (e) {
+        console.error("Erro ao remover tarefa: ", e);
+        alert("Erro ao remover tarefa.");
+      }
+    }
+  </script>
+</body>
+</html>

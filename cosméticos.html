@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosméticos para Pets</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background-image: url('4k.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: rgba(52, 58, 64, 0.8);
+      color: #fff;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px 15px;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    .sidebar a:hover {
+      background-color: #495057;
+      transform: translateX(5px);
+    }
+
+    .main {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-title {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #007bff;
+    }
+
+    .product-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .product-info .product-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      margin-right: 15px;
+      border: 2px solid #007bff;
+      transition: border-color 0.3s ease;
+    }
+
+    .product-info .product-name {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .product-info .product-description {
+      font-size: 1em;
+      color: #666;
+    }
+
+    .button {
+      background-color: #007bff;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 180px;
+      }
+
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio id="background-music" autoplay loop>
+    <source src="C418.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+
+  <div class="container">
+    <div class="sidebar">
+      <a href="Dashboard.html">Dashboard</a>
+    </div>
+    <div class="main">
+      <div class="card">
+        <h2 class="card-title">Cosméticos para Pets</h2>
+        <div class="product-info">
+          <img src="Cães.png" class="product-image" alt="Imagem do Produto">
+          <div>
+            <span class="product-name">Cães</span>
+            <p class="product-description">Cães Nivel 50 Da vidar e regeneração.</p>
+          </div>
+        </div>
+        <button class="button">Comprar</button>
+      </div>
+      <div class="card">
+        <h2 class="card-title">Cosméticos para Pets</h2>
+        <div class="product-info">
+          <img src="gato.png" class="product-image" alt="Imagem do Produto">
+          <div>
+            <span class="product-name">Gato Normal</span>
+            <p class="product-description"></p>
+          </div>
+        </div>
+        <div>
+            <span class="product-name">Gato Nivel 50</span>
+            <p class="product-description">Da vidar </p>
+          </div>
+        </div>
+        <button class="button">Comprar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Código do Firebase e autenticação pode ser incluído aqui, se necessário.
+  </script>
+</body>
+</html>
